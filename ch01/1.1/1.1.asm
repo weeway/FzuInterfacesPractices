@@ -1,5 +1,5 @@
-;²úÉúÒ»¸öÖÜÆÚÎª 1ms µÄ·½²¨£¬²¢ÔÚÊ¾²¨Æ÷ÉÏÏÔÊ¾
-;clk0 ½Ó 2MHZ
+;äº§ç”Ÿä¸€ä¸ªå‘¨æœŸä¸º 1ms çš„æ–¹æ³¢ï¼Œå¹¶åœ¨ç¤ºæ³¢å™¨ä¸Šæ˜¾ç¤º
+;clk0 æŽ¥ 2MHZ
 
 DSEG SEGMENT
 	T0 EQU 280H

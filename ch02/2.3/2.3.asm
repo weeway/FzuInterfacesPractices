@@ -1,15 +1,20 @@
+;A口工作在方式0，输入，接8个开关，B口工作在方式0，输出，接八段显示器；
+;由8253产生1s的脉冲，PC7接该脉冲，来个脉冲将读取A口，显示在屏幕上，同
+;时；显示在八段显示器上，PC0,PC1作为位码信号
+
+
 DATA SEGMENT
     T0      EQU 280H
     T1      EQU 281H
     T2      EQU 282H
-    CLT1     EQU 283H
-    PA        EQU 288H
-    PB        EQU 289H
-    PC        EQU 28AH
-    CTL    EQU 28BH
-    LTABLE    DB 3FH,06H,5BH,4FH,66H,60H,7DH,07H
-            DB 7FH,6FH,77H,7CH,39H,5EH,79H,71H
-    DAT        DB 21H
+    CLT1    EQU 283H
+    PA      EQU 288H
+    PB      EQU 289H
+    PC      EQU 28AH
+    CTL     EQU 28BH
+    LTABLE  DB  3FH,06H,5BH,4FH,66H,60H,7DH,07H
+            DB  7FH,6FH,77H,7CH,39H,5EH,79H,71H
+    DAT     DB  21H
 DATA ENDS
 
 CODE SEGMENT
@@ -55,7 +60,7 @@ LED_S PROC
     AND BL,0FH      ;取低4位（A口开关输入）
     CALL LED_1      ;显示低4位
     MOV DX,PC      
-    MOV AL,1H       ;PC0 接数码管0 共阳极
+    MOV AL,1H       ;PC0 接数码管0 共阴极
     OUT DX,AL
 
     MOV DX,PC       ;熄位码
@@ -66,9 +71,9 @@ LED_S PROC
     MOV CL,4
     SHR BL,CL
     AND BL,0FH      ;取高4位
-    CALL LED_1      ;显示低四位
+    CALL LED_1      ;显示高四位
     MOV DX,PC
-    MOV AL,02H      ;PC1 接数码管1 共阳极
+    MOV AL,02H      ;PC1 接数码管1 共阴极
     OUT DX,AL
 
     MOV DX,PC       ;熄位码
@@ -180,6 +185,26 @@ INIT_8253 ENDP
 
 INIT_8255 PROC
     PUSH DX
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     PUSH AX
 
     MOV DX,CTL

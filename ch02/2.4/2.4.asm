@@ -39,9 +39,9 @@ LED_1 PROC
     ADD  SI,BX           
  
     MOV AL,[SI] 
-    AND AL,7FH          ;段码，最高置0，熄小数点
+    AND AL,7FH           ;段码，最高置0，熄小数点
 
-    MOV DX,PB           ;到B口
+    MOV DX,PB            ;到B口
     OUT DX,AL
 
     POP SI

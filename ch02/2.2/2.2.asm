@@ -1,8 +1,11 @@
+;8255 A口，工作方式0，输入，接8个开关，B口方式0，输出，接8个LED，PC0
+;接1s的8253，8253输入负脉冲时，读一次A口，存入TABLE内存单元中，并在B口显示
+
 DATA SEGMENT
     T0      EQU 280H
     T1      EQU 281H
     T2      EQU 282H
-    CLT1     EQU 283H
+    CLT1    EQU 283H
     PA   EQU 288H
     PB   EQU 289H
     PC   EQU 28AH

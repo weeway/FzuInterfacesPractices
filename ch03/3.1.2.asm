@@ -1,0 +1,55 @@
+;掩饰法，32次产生锯齿波，最高点-5V
+;波形(32阶梯):
+;
+;_ 0V
+; |_
+;   |_
+;	  |_
+;    	|_
+;         |_
+;           |_...
+;				 |_	
+;                  |_ -5V
+
+
+DATA SEGMENT
+DATA ENDS
+
+STACK1 SEGMENT PARA STACK
+	DW 20H DUP(0)
+STACK1 ENDS
+
+CODE SEGMENT
+	ASSUME CS:CODE,DS:DATA,SS:STACK1
+START:
+	MOV AX,DATA
+	MOV DS,AX
+
+	MOV AL,00H
+AGAIN:
+	MOV  DX,280H	
+	OUT  DX,AL		;写入0832输入寄存器，直通DAC寄存器
+	CALL DELAY		;延时
+	ADD  AL,08H		;步进08H,32次后AL溢出清零。周期性产生锯齿波
+	JMP  AGAIN
+
+	MOV  AH,4CH
+	INT  21H
+
+DELAY PROC 
+	PUSH CX
+	
+	MOV  CX,0FFFFH
+L1:
+	LOOP L1
+
+	MOV  CX,0FFFFH
+L2: 
+	LOOP L2
+
+	POP  CX
+	RET
+DELAY ENDP
+
+CODE ENDS
+END  START
