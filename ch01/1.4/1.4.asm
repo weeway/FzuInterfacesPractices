@@ -1,6 +1,5 @@
-
-;4.²úÉú 1S ·½²¨£¬²¢ÔÚ LED ÉÏÏÔÊ¾
-;¼ÆÊýÖµ 2000¡¢1000
+;4.äº§ç”Ÿ 1S æ–¹æ³¢ï¼Œå¹¶åœ¨ LED ä¸Šæ˜¾ç¤º
+;è®¡æ•°å€¼ 2000ã€1000
 DSEG SEGMENT
 	T0  EQU 280H
 	T1  EQU 281H
@@ -15,9 +14,9 @@ START:
 	MOV AX,DSEG
 	MOV DS,AX
 
-	;T1 | ²úÉú 1ms µÄ·½²¨
+
 	MOV DX,CLT
-	MOV AL,00110111B ;ÏÈµÍ×Ö½Ú£¬ºó¸ß×Ö½Ú£¬·½Ê½3£¬BCDÂë
+	MOV AL,00110111B 
 	OUT DX,AL
 
 	MOV DX,T0
@@ -28,7 +27,6 @@ START:
 	OUT DX,AL
 
 	
-	;T1 | ÒÔ T0 µÄ OUT Îª CLK, ²úÉú 1s ·½²¨
 	MOV DX,CLT
 	MOV AL,01110111B 
 	OUT DX,AL
