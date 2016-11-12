@@ -167,14 +167,15 @@ CRT PROC NEAR				;显示在屏幕上
     
     MOV  AX,NUM2 			;打印低4位
     XLAT TABLE_CRT
+    
     MOV  DL,AL
     MOV  AH,02H
-    
     INT  21H
+    
     MOV  DL,' '
     MOV  AH,02H
-    
     INT  21H
+    
     MOV  DL,' '
     MOV  AH,02H
     INT  21H
