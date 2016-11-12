@@ -50,7 +50,7 @@ INIT:
     MOV DI,0
 READ_INPUT:
     CALL LIGHT_LED
-    MOV  DX,282H
+    MOV  DX,282H 			;PC 端口
     IN   AL,DX
     AND  AL,01H
     JZ   READ_INPUT 		;消耗完负脉冲
@@ -64,9 +64,9 @@ READ_INPUT:
     MOV  DX,TABLE_KONG[DI]  ;每个端口地址 占 2个 BYTE
     POP  DI
     OUT  DX,AL              ;选通TABLE_KONG[DI],启动A/D转换(AL值任意)
-    CALL DELAY
+    CALL READ_INx 			;调用 READ_INx 读取 INx 的数据
     
-    IN   AL,DX              ;读取端口（IN0~IN7）数据
+    IN   AL,DX              ;读取端口（INx）数据
     MOV  AH,AL              
     
     PUSH CX				    ;INx 的数据高4位、低4位分别存
@@ -97,7 +97,7 @@ FINAL:
     MOV  AH,4CH
     INT  21H
 
-DELAY PROC NEAR				;PC7 接EOC
+READ_INx PROC NEAR				;PC7 接EOC
     PUSH DX 				;等待 ADC 转换完成
   AGAIN:
     MOV  DX,282H
@@ -106,20 +106,20 @@ DELAY PROC NEAR				;PC7 接EOC
     JZ   AGAIN
     POP  DX
     RET
-DELAY ENDP
+READ_INx ENDP
 
 LIGHT_LED PROC NEAR
     MOV  AL,0H
-    MOV  DX,281H
+    MOV  DX,281H 			;PB口  位码
     OUT  DX,AL
 
-    MOV  AX,NUM2 			;显示高4位
+    MOV  AX,NUM2 			;显示低4位
     LEA  BX,TABLE_LED
-    XLAT TABLE_LED 			;取出段码
-    MOV  DX,280H
+    XLAT TABLE_LED 			;取出段码到 AL
+    MOV  DX,280H 			;PA口
     OUT  DX,AL				;送往 PA 口 
 
-    MOV  AL,10H				;PB4 = 1 点亮数码管 S1
+    MOV  AL,10H				;PB4 = 1 点亮数码管 S0
     MOV  DX,281H
     OUT  DX,AL
 
@@ -127,13 +127,13 @@ LIGHT_LED PROC NEAR
     MOV  DX,281H
     OUT  DX,AL
 
-    MOV  AX,NUM2 			;显示低4位
-    MOV  AL,AH
-    XLAT TABLE_LED
+    MOV  AX,NUM2 			;显示高4位
+    MOV  AL,AH 				
+    XLAT TABLE_LED 			;换码操作：以DS:[BX+AL]为地址，提取存储器中的一个字节再送入AL
     MOV  DX,280H
     OUT  DX,AL
     
-    MOV  AL,20H
+    MOV  AL,20H 			;PB5 = 1 点亮数码管 S1
     MOV  DX,281H
     OUT  DX,AL
     
