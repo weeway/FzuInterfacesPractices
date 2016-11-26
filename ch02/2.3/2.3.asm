@@ -1,7 +1,8 @@
 ;A口工作在方式0，输入，接8个开关，B口工作在方式0，输出，接八段显示器；
 ;由8253产生1s的脉冲，PC7接该脉冲，来个脉冲将读取A口，显示在屏幕上，同
 ;时；显示在八段显示器上，PC0,PC1作为位码信号
-
+;
+;数码管共阴极接法
 
 DATA SEGMENT
     T0      EQU 280H
@@ -12,7 +13,7 @@ DATA SEGMENT
     PB      EQU 289H
     PC      EQU 28AH
     CTL     EQU 28BH
-    LTABLE  DB  3FH,06H,5BH,4FH,66H,60H,7DH,07H
+    LTABLE  DB  3FH,06H,5BH,4FH,66H,6DH,7DH,07H
             DB  7FH,6FH,77H,7CH,39H,5EH,79H,71H
     DAT     DB  21H
 DATA ENDS
@@ -25,12 +26,12 @@ START:
     MOV DS,AX
 
     CALL INIT_8253
-    CALL INIT_8255
+    CALL INIT_8255  
 
 AGAIN:
     CALL READ_PA
     CALL DISP_DAT
-    JMP AGAIN
+    JMP  AGAIN
 
     MOV AH,4CH
     INT 21H
@@ -99,9 +100,16 @@ LOOP_CHECK:
     TEST AL,80H
     JNZ  LOOP_CHECK
 
+
+WAT1: 
     MOV  DX,PA      ;读入新数据
     IN   AL,DX       
     MOV  DAT,AL     ;存到内存 DAT
+
+    MOV DX,PC
+    IN  AL,DX
+    AND AL,80H
+    JZ  WAT1
 
     POP  AX
     POP  DX
@@ -150,6 +158,7 @@ S2:
     RET
 DISP_DAT ENDP
 
+;1s 方波
 INIT_8253 PROC
     PUSH DX
     PUSH AX
@@ -183,28 +192,9 @@ INIT_8253 PROC
     RET
 INIT_8253 ENDP
 
+;方式0 A口输入，B口输出，C上半口输入，C下半口输出
 INIT_8255 PROC
     PUSH DX
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     PUSH AX
 
     MOV DX,CTL

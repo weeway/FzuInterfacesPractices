@@ -1,4 +1,4 @@
-;8255 A口，工作方式0，输入，接8个开关，B口方式0，输出，接8个LED，PC0
+;8255 A口，工作方式0，输入，接8个开关。B口方式0，输出，接8个LED。PC0
 ;接1s的8253，8253输入负脉冲时，读一次A口，存入TABLE内存单元中，并在B口显示
 
 DATA SEGMENT
@@ -30,7 +30,7 @@ START:
     MOV AL,10011001B
     OUT DX,AL
 
-    MOV CX,256
+    MOV CX,10
     MOV SI,0
 WAT:
     MOV DX,PC

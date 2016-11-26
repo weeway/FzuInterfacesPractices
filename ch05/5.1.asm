@@ -37,7 +37,7 @@ INT3:                 	;中断服务程序
 	
 	MOV  AL, 20H     
 	OUT  20H, AL    	;发出 EOI 结束中断     
-	LOOP  NEXT     
+	LOOP NEXT     
 	
 	IN   AL, 21H     	;读中断屏蔽寄存器     
 	OR   AL, 08H     	;关闭 IRQ3 中断     

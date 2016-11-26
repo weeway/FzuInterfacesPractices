@@ -1,4 +1,4 @@
-;6¡¢²úÉúÖÜÆÚÎª 10ms ,¸ºÂö³å¿í¶ÈÎª 1 ms µÄÁ¬ÐøÂö³å¡£ 
+;6ã€äº§ç”Ÿå‘¨æœŸä¸º 10ms ,è´Ÿè„‰å†²å®½åº¦ä¸º 1 ms çš„è¿žç»­è„‰å†²ã€‚ 
 DSEG SEGMENT
 	T0  EQU 280H
 	T1  EQU 281H
@@ -13,20 +13,19 @@ START:
 	MOV AX,DSEG
 	MOV DS,AX
 
-	;T0 | ²úÉúÖÜÆÚÎª 1ms µÄ¸ºÂö³å
+	;T0=1000
 	MOV DX,CLT
-	MOV AL,00110101B ;ÏÈµÍ×Ö½Ú£¬ºó¸ß×Ö½Ú£¬·½Ê½2£¬BCDÂë
+	MOV AL,00110101B 
 	OUT DX,AL
 
 	MOV DX,T0
 	MOV AL,00H
 	OUT DX,AL
-
 	MOV AL,20H
 	OUT DX,AL
 
 	
-	;T1 | ÒÔ T0 µÄ OUT Îª CLK, ²úÉúÖÜÆÚÎª 10ms ¸ºÂö³å
+	;T1=10
 	MOV DX,CLT
 	MOV AL,01010101B 
 	OUT DX,AL

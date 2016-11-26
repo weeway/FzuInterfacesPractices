@@ -1,5 +1,5 @@
-;2.²úÉúÖÜÆÚÎª 1ms µÄÁ¬Ðø¸ºÂö³å£¬²¢ÔÚÊ¾²¨Æ÷ÉÏÏÔÊ¾
-;¼ÆÊýÖµ 2000
+;2.äº§ç”Ÿå‘¨æœŸä¸º 1ms çš„è¿žç»­è´Ÿè„‰å†²ï¼Œå¹¶åœ¨ç¤ºæ³¢å™¨ä¸Šæ˜¾ç¤ºã€‚ 
+;N = 2000 \ æ­£:è´Ÿ=(2000-1):1
 DSEG SEGMENT
 	T0  EQU 280H
 	T1  EQU 281H
@@ -15,7 +15,7 @@ START:
 	MOV DS,AX
 
 	MOV DX,CLT
-	MOV AL,00110101B ;ÏÈµÍ×Ö½Ú£¬ºó¸ß×Ö½Ú£¬·½Ê½2£¬BCDÂë
+	MOV AL,00110101B ;æ–¹å¼2
 	OUT DX,AL
 
 	MOV DX,T0

@@ -1,5 +1,5 @@
 ;4.产生 1S 方波，并在 LED 上显示
-;计数值 2000、1000
+;计数值 T0=2000、T1=1000
 DSEG SEGMENT
 	T0  EQU 280H
 	T1  EQU 281H
@@ -16,7 +16,7 @@ START:
 
 
 	MOV DX,CLT
-	MOV AL,00110111B 
+	MOV AL,00110111B ;方式3；计数值 BCD码 表示；先写低4位，后写高4位
 	OUT DX,AL
 
 	MOV DX,T0

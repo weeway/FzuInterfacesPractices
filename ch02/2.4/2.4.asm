@@ -1,3 +1,11 @@
+;4、A 口工作在方式 0 输入方式，接 4 个开关，B 口工作在方式 0 输出方式，
+;接 1 个七段显示器，PC7 接单脉冲发生器，输入负脉冲时，读一次 A 口，同时
+;在 B 口显示，读 16 次结束
+
+
+
+
+
 DATA SEGMENT
     T0      EQU 280H
     T1      EQU 281H
@@ -94,8 +102,8 @@ LOOP_C:
     IN   AL,DX          
     MOV  DAT,AL
 
-    MOV  BH,0
-    MOV  BL,DAT
+    ;MOV  BH,0
+    ;MOV  BL,DAT
     CALL LED_S         
 
     MOV  DX,PC
