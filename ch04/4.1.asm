@@ -97,7 +97,7 @@ FINAL:
     MOV  AH,4CH
     INT  21H
 
-READ_INx PROC NEAR				;PC7 接EOC
+READ_INx PROC NEAR			;PC7 接EOC
     PUSH DX 				;等待 ADC 转换完成
   AGAIN:
     MOV  DX,282H
